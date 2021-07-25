@@ -17,7 +17,7 @@ class EmailScreen extends Component<EnterEmailScreenProps> {
         const { navigation, route } = this.props
         const {data} = route.params;
         return (
-            <Text>Enter email screen {data}</Text>
+            <Text>Enter Email Screen {data}</Text>
         )
     }
 }
