@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Button, Text, View } from 'react-native';
+import { AllNavParamList } from '../../routes/AppRoutesList';
+
+type HomeScreenNavigationProp = StackNavigationProp<AllNavParamList, 'HomeScreen'>;
+type HomeScreenProps = {
+    navigation: HomeScreenNavigationProp;
+};
+
+class HomeScreen extends Component<HomeScreenProps> {
+    render() {
+        const { navigation } = this.props
+        const data = 'badal'
+        return (
+            <View>
+                <Text>Home screen</Text>
+                <Button
+                    title="Press me"
+                    onPress={() => navigation.navigate('EmailScreen', { data })}
+                />
+            </View>
+        )
+    }
+}
+
+export default HomeScreen;
