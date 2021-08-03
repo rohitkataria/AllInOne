@@ -1,4 +1,4 @@
 export type AllNavParamList = {
-    EmailScreen: {data: string};
+    EmailScreen: { data: string };
     HomeScreen: undefined;
 }
