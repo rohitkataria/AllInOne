@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
-import { Text, View } from 'react-native';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { AllNavParamList } from '../../routes/AppRoutesList';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { UserStore } from '../../stores';
+import { Value } from 'react-native-reanimated';
 
 
 
@@ -20,6 +21,12 @@ type EnterEmailScreenProps = {
 @inject('userStore')
 @observer
 class EmailScreen extends Component<EnterEmailScreenProps> {
+    @observable placeholderValue = ''
+    onValueChange(value: string) {
+        const {navigation, route} = this.props;
+        this.placeholderValue = value
+       route.params.onSubmit(this.placeholderValue)
+    }
     @observable song = 'string'
     render() {
         const { route, userStore } = this.props
@@ -30,9 +37,22 @@ class EmailScreen extends Component<EnterEmailScreenProps> {
                 <Text>Enter Email Screen  {data}</Text>
                 <Text>{this.song}</Text>
                 <Text>{email}</Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text) => this.onValueChange(text)}
+                    placeholder="useless placeholder"
+                />
             </View>
         )
     }
 }
 
+const styles = StyleSheet.create({
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+});
 export default EmailScreen;
