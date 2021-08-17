@@ -16,16 +16,16 @@ type HomeScreenProps = {
 @inject('userStore')
 @observer
 class HomeScreen extends Component<HomeScreenProps> {
- @action
- private onSubmit(name: string): void{
-     console.log("name>>>",name)
- }
- @action
- private moveToScreen(): void{
-    const {navigation} = this.props;
-    const data = 'badal'
-    navigation.navigate('EmailScreen',{data, onSubmit:(name: string) =>this.onSubmit(name) })
- }
+    @action
+    private onSubmit(name: string): void {
+        console.log("name>>>", name)
+    }
+    @action
+    private moveToScreen(): void {
+        const { navigation } = this.props;
+        const data = 'badal'
+        navigation.navigate('EmailScreen', { data, onSubmit: (name: string) => this.onSubmit(name) })
+    }
     render() {
         const { navigation, userStore } = this.props
         userStore.setEmail('sohal@gmail.com');
@@ -36,12 +36,12 @@ class HomeScreen extends Component<HomeScreenProps> {
                     title="Press me"
                     onPress={() => this.moveToScreen()}
                 />
-             
+
             </View>
         )
     }
- 
+
 }
 
-  
+
 export default HomeScreen;

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { AllNavParamList } from '../../routes/AppRoutesList';
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { UserStore } from '../../stores';
-import { Value } from 'react-native-reanimated';
-
-
+import { ImageLibraryOptions, launchImageLibrary } from 'react-native-image-picker';
 
 type EmailScreenNavigationProp = StackNavigationProp<AllNavParamList, 'EmailScreen'>;
 type ScreenRouteProps = RouteProp<AllNavParamList, 'EmailScreen'>;
@@ -28,6 +26,35 @@ class EmailScreen extends Component<EnterEmailScreenProps> {
        route.params.onSubmit(this.placeholderValue)
     }
     @observable song = 'string'
+
+
+
+    @action
+    private openPicker(): void{
+        const options: ImageLibraryOptions = {
+          mediaType:'photo'
+          };
+        launchImageLibrary(options, (response) => {
+            console.log('Response = ', response.assets);
+      
+            // if (response.didCancel) {
+            //   console.log('User cancelled image picker');
+            // } else if (response.error) {
+            //   console.log('ImagePicker Error: ', response.error);
+            // } else if (response.customButton) {
+            //   console.log('User tapped custom button: ', response.customButton);
+            //   alert(response.customButton);
+            // } else {
+            //   const source = { uri: response.uri };
+            //   console.log('response', JSON.stringify(response));
+            //   this.setState({
+            //     filePath: response,
+            //     fileData: response.data,
+            //     fileUri: response.uri
+            //   });
+        //     }
+          });
+    }
     render() {
         const { route, userStore } = this.props
         const { data } = route.params;
@@ -42,6 +69,7 @@ class EmailScreen extends Component<EnterEmailScreenProps> {
                     onChangeText={(text) => this.onValueChange(text)}
                     placeholder="useless placeholder"
                 />
+                <Button title='choose image' onPress={() => this.openPicker()}/> 
             </View>
         )
     }
