@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { AllNavParamList } from '../../routes/AppRoutesList';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { UserStore } from '../../stores';
-import { Value } from 'react-native-reanimated';
 
 
 
@@ -21,11 +20,14 @@ type EnterEmailScreenProps = {
 @inject('userStore')
 @observer
 class EmailScreen extends Component<EnterEmailScreenProps> {
-    @observable placeholderValue = ''
+    @observable val = '';
     onValueChange(value: string) {
-        const {navigation, route} = this.props;
-        this.placeholderValue = value
-       route.params.onSubmit(this.placeholderValue)
+        this.val = value;
+    }
+    moveToBackScreen() {
+        const { route, navigation } = this.props;
+        route.params.onSubmit(this.val)
+        navigation.goBack()
     }
     @observable song = 'string'
     render() {
@@ -41,6 +43,10 @@ class EmailScreen extends Component<EnterEmailScreenProps> {
                     style={styles.input}
                     onChangeText={(text) => this.onValueChange(text)}
                     placeholder="useless placeholder"
+                />
+                <Button
+                    title="Press me"
+                    onPress={() => this.moveToBackScreen()}
                 />
             </View>
         )
