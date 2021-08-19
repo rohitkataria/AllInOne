@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { AllNavParamList } from '../../routes/AppRoutesList';
 import { inject, observer } from 'mobx-react';
 import { UserStore } from '../../stores';
-import { action } from 'mobx';
+import { action, observable } from 'mobx';
 
 
 type HomeScreenNavigationProp = StackNavigationProp<AllNavParamList, 'HomeScreen'>;
@@ -16,32 +16,39 @@ type HomeScreenProps = {
 @inject('userStore')
 @observer
 class HomeScreen extends Component<HomeScreenProps> {
- @action
- private onSubmit(name: string): void{
-     console.log("name>>>",name)
- }
- @action
- private moveToScreen(): void{
-    const {navigation} = this.props;
-    const data = 'badal'
-    navigation.navigate('EmailScreen',{data, onSubmit:(name: string) =>this.onSubmit(name) })
- }
+    @observable placeholderName = ''
+
+    @action
+    private onSubmit(name: string): void {
+        this.placeholderName = name
+        console.log("name>>>", name)
+        console.log("pname>>>", this.placeholderName)
+    }
+
+    @action
+    private moveToScreen(): void {
+        const { navigation } = this.props;
+        const data = 'badal'
+        navigation.navigate('EmailScreen', { data, onSubmit: (name: string) => this.onSubmit(name) })
+    }
     render() {
-        const { navigation, userStore } = this.props
+        const { userStore } = this.props
         userStore.setEmail('sohal@gmail.com');
+        console.log("vgfvh",this.placeholderName)
         return (
             <View>
-                <Text>Home screen</Text>
+                <Text>Home screen </Text>
+                <Text style={{color:'green'}}>{this.placeholderName}</Text>
                 <Button
                     title="Press me"
                     onPress={() => this.moveToScreen()}
                 />
-             
+
             </View>
         )
     }
- 
+
 }
 
-  
+
 export default HomeScreen;
