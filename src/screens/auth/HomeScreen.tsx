@@ -5,6 +5,7 @@ import { AllNavParamList } from '../../routes/AppRoutesList';
 import { inject, observer } from 'mobx-react';
 import { UserStore } from '../../stores';
 import { action, observable } from 'mobx';
+import { CustomButton } from '../../components';
 
 
 type HomeScreenNavigationProp = StackNavigationProp<AllNavParamList, 'HomeScreen'>;
@@ -34,16 +35,22 @@ class HomeScreen extends Component<HomeScreenProps> {
     render() {
         const { userStore } = this.props
         userStore.setEmail('sohal@gmail.com');
-        console.log("vgfvh",this.placeholderName)
+        console.log("vgfvh", this.placeholderName)
         return (
             <View>
                 <Text>Home screen </Text>
-                <Text style={{color:'green'}}>{this.placeholderName}</Text>
+                <Text style={{ color: 'green' }}>{this.placeholderName}</Text>
                 <Button
                     title="Press me"
                     onPress={() => this.moveToScreen()}
                 />
-
+             <CustomButton 
+                borderColor= 'green'
+                backgroundColor='green'
+                text={`Button`}
+                customStyle={{marginTop: 30,}}
+                onPress={() => null}
+                />
             </View>
         )
     }
