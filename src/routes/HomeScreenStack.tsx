@@ -1,8 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import EmailScreen from '../screens/auth/EmailScreen';
-import { HomeScreen } from '../screens';
+import { HomeScreen,  EmailScreen} from '@screens';
 
 const HomeStack = createStackNavigator();
 const HomeStackScreen: React.FC<any> = () => {
