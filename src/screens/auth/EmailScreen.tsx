@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { AllNavParamList } from '../../routes/AppRoutesList';
+import { AllNavParamList } from '@routes';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import { UserStore } from '../../stores';
+import { UserStore } from '@stores';
 
 
 
@@ -26,7 +26,7 @@ class EmailScreen extends Component<EnterEmailScreenProps> {
     }
     moveToBackScreen() {
         const { route, navigation } = this.props;
-        route.params.onSubmit(this.val)
+        // route.params.onSubmit(this.val)
         navigation.goBack()
     }
     @observable song = 'string'

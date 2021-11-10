@@ -1,4 +1,4 @@
-import { Icolors } from "../interfaces/CustomTheme.interface";
+import { Icolors } from "@interfaces";
 
 const COLORS:Icolors = {
     BLACK: '#000000',

@@ -1,4 +1,4 @@
 export type AllNavParamList = {
-    EmailScreen: { data: string, onSubmit:Function };
+    EmailScreen: { data: string };
     HomeScreen: undefined;
 }
